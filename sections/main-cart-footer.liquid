@@ -3,6 +3,15 @@
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
 
+<script>
+  window.cartStrings = {
+    please_enter_birthdate: {{ 'general.cart.please_enter_birthdate' | t | json }},
+    must_be_18: {{ 'general.cart.must_be_18' | t | json }}
+  };
+</script>
+
+<script src="{{ 'age-verification.js' | asset_url }}" defer></script>
+
 {%- style -%}
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
@@ -105,25 +114,28 @@
               </div>
             {%- else -%}
               <div class="cart__ctas" {{ block.shopify_attributes }}>
-                <button
-                  type="submit"
-                  id="checkout"
-                  class="cart__checkout-button button"
-                  name="checkout"
-                  {% if cart == empty %}
-                    disabled
-                  {% endif %}
-                  form="cart"
-                >
-                  {{ 'sections.cart.checkout' | t }}
-                </button>
-              </div>
+                <age-verification data-cart-empty="{% if cart == empty %}true{% else %}false{% endif %}">
+                </age-verification>
 
-              {%- if additional_checkout_buttons -%}
-                <div class="cart__dynamic-checkout-buttons additional-checkout-buttons">
-                  {{ content_for_additional_checkout_buttons }}
-                </div>
-              {%- endif -%}
+                <noscript>
+                  <button
+                    type="submit"
+                    id="checkout"
+                    class="cart__checkout-button button"
+                    name="checkout"
+                    {% if cart == empty %}disabled{% endif %}
+                    form="cart"
+                  >
+                    {{ 'sections.cart.checkout' | t }}
+                  </button>
+                </noscript>
+
+                {%- if additional_checkout_buttons -%}
+                  <div class="cart__dynamic-checkout-buttons additional-checkout-buttons">
+                    {{ content_for_additional_checkout_buttons }}
+                  </div>
+                {%- endif -%}
+              </div>
           {%- endcase -%}
         {% endfor %}
 
@@ -132,6 +144,7 @@
     </div>
   </div>
 </div>
+
 
 {% schema %}
 {

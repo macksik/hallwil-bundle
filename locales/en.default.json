@@ -51,7 +51,11 @@
     "cart": {
       "view": "View cart ({{ count }})",
       "view_empty_cart": "View cart",
-      "item_added": "Item added to your cart"
+      "item_added": "Item added to your cart",
+      "age_verification": "Please verify your age",
+      "please_enter_birthdate": "Please enter your birthdate",
+      "must_be_18": "You must be at least 18 years old to purchase",
+      "error": "There was an error while updating your cart. Please try again."
     },
     "share": {
       "close": "Close share",
