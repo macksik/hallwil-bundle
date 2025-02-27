@@ -37,6 +37,46 @@
         padding-bottom: {{ section.settings.padding_bottom }}px;
       }
     }
+
+    .product-bundle {
+      margin-top: 2rem;
+    }
+
+    .bundle-title {
+      margin-bottom: 1.5rem;
+    }
+
+    .bundle-products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .bundle-product {
+      text-align: center;
+    }
+
+    .bundle-product-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .bundle-product img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .bundle-product h4 {
+      margin: 0.5rem 0;
+    }
+
+    .bundle-product-price {
+      color: var(--price-text-color);
+      font-weight: 600;
+    }
   {%- endstyle -%}
 
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
@@ -660,6 +700,8 @@
                 </product-recommendations>
               {%- when 'icon-with-text' -%}
                 {% render 'icon-with-text', block: block %}
+              {%- when 'bundle_products' -%}
+                {% render 'bundle-product', product: product, block: block %}
             {%- endcase -%}
           {%- endfor -%}
           <a href="{{ product.url }}" class="link product__view-details animate-arrow">
@@ -912,6 +954,18 @@
           "default": true,
           "label": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.label",
           "info": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.info"
+        }
+      ]
+    },
+    {
+      "type": "bundle_products",
+      "name": "Bundle Products",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Bundle Products",
+          "label": "Title"
         }
       ]
     },

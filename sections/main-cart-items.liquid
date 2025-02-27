@@ -4,6 +4,7 @@
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
 {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
+{{ 'cart-bundle.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
   .section-{{ section.id }}-padding {
@@ -159,6 +160,25 @@
                         </dl>
 
                         <p class="product-option">{{ item.selling_plan_allocation.selling_plan.name }}</p>
+                      {%- endif -%}
+
+                      {%- if item.product.metafields.custom.bundle != blank -%}
+                        <div class="cart-item-bundles">
+                          <div class="cart-item-bundles__grid">
+                            {% assign bundle_products = item.product.metafields.custom.bundle.value %}
+                            {% for bundle_product in bundle_products %}
+                              <a href="{{ bundle_product.url }}" class="cart-item-bundle">
+                                <div class="cart-item-bundle__image">
+                                  {{ bundle_product.featured_image | image_url: width: 60, height: 60 | image_tag: loading: 'lazy' }}
+                                </div>
+                                <div class="cart-item-bundle__content">
+                                  <h4 class="cart-item-bundle__title">{{ bundle_product.title }}</h4>
+                                  <p class="cart-item-bundle__price">{{ bundle_product.price | money }}</p>
+                                </div>
+                              </a>
+                            {% endfor %}
+                          </div>
+                        </div>
                       {%- endif -%}
 
                       <ul class="discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t }}">

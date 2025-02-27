@@ -1,0 +1,21 @@
+{%- if product.metafields.custom.bundle -%}
+    <div class="product-bundle" {{ block.shopify_attributes }}>
+      <h3 class="bundle-title">{{ block.settings.title | default: 'Related Products' }}</h3>
+      <div class="bundle-products-grid">
+        {% assign bundle_products = product.metafields.custom.bundle.value %}
+        {% for bundle_product in bundle_products %}
+          <div class="bundle-product">
+            <a href="{{ bundle_product.url }}" class="bundle-product-link">
+              <div class="bundle-product-image">
+                {{ bundle_product.featured_image | image_url: width: 100, height: 100 | image_tag: loading: 'lazy' }}
+              </div>
+              <div class="bundle-product-content">
+                <h4 class="bundle-product-title">{{ bundle_product.title }}</h4>
+                <p class="bundle-product-price">{{ bundle_product.price | money }}</p>
+              </div>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {%- endif -%}
