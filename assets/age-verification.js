@@ -118,11 +118,14 @@ class AgeVerification extends HTMLElement {
     }
 
     errorElement.style.display = 'none';
-    const checkoutButton = document.querySelector('button[name="checkout"]');
-    if (checkoutButton) {
-      checkoutButton.click();
-    } else {
-      document.getElementById('cart').submit();
+    
+    const form = document.getElementById('cart');
+    if (form) {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = 'checkout';
+      form.appendChild(input);
+      form.submit();
     }
   }
 
