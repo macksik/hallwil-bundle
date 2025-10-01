@@ -26,10 +26,23 @@
             "product": "",
             "colour": "#ff0000"
           }
+        },
+        "advanced_filter_app_filter_checkbox_group_cDUHQd": {
+          "type": "shopify://apps/advanced-filter-app/blocks/filter-checkbox-group/0199a12e-f3f6-79ab-9fdd-ba7c2449886c",
+          "settings": {
+            "title": "Filter Group",
+            "filter_type": "collection",
+            "vendors": "",
+            "product_types": "",
+            "tags": "",
+            "custom_filter_key": "custom_filter",
+            "custom_options": ""
+          }
         }
       },
       "block_order": [
-        "advanced_filter_app_star_rating_teeq4D"
+        "advanced_filter_app_star_rating_teeq4D",
+        "advanced_filter_app_filter_checkbox_group_cDUHQd"
       ],
       "settings": {
         "include_margins": true
